@@ -1,4 +1,6 @@
 class CharactersController < ApplicationController
+  skip_before_action :authorize, only: [:index, :show]
+
   before_action :set_character, only: %i[ show update destroy ]
 
   # GET /characters
@@ -15,13 +17,8 @@ class CharactersController < ApplicationController
 
   # POST /characters
   def create
-    @character = Character.new(character_params)
-
-    if @character.save
-      render json: @character, status: :created, location: @character
-    else
-      render json: @character.errors, status: :unprocessable_entity
-    end
+    @character = @current_user.characters.create!(character_params)
+    render json: @character
   end
 
   # PATCH/PUT /characters/1
@@ -46,6 +43,6 @@ class CharactersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def character_params
-      params.require(:character).permit(:class, :race, :alignment, :name, :image, :user_id, :campaign_id)
+      params.permit(:character_class, :race, :alignment, :name, :image, :campaign_id)
     end
 end

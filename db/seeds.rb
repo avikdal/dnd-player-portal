@@ -1,15 +1,20 @@
+User.destroy_all
+Campaign.destroy_all
+Character.destroy_all
+Post.destroy_all
+
 # Seed data for users
 User.create([
-  { username: 'Amanda', password_digest: 'pass', bio: 'Adventurer in the world of fantasy.' },
-  { username: 'Indigo', password_digest: 'pass', bio: 'Enthusiastic role-player and storyteller.' },
-  { username: 'Elena', password_digest: 'pass', bio: 'Magical being exploring new realms.' },
-  { username: 'Gideon', password_digest: 'pass', bio: 'Dungeon master with a passion for epic tales.' },
-  { username: 'Mira', password_digest: 'pass', bio: 'Seeker of treasures and ancient mysteries.' },
-  { username: 'Felix', password_digest: 'pass', bio: 'Bard with a silver tongue and a quick wit.' },
-  { username: 'Thalia', password_digest: 'pass', bio: 'Mystical sorceress wielding arcane powers.' },
-  { username: 'Cyrus', password_digest: 'pass', bio: 'Rogue with a shady past and a quick blade.' },
-  { username: 'Luna', password_digest: 'pass', bio: 'Moonlit ranger with a bow and a wolf companion.' },
-  { username: 'Orion', password_digest: 'pass', bio: 'Celestial cleric on a divine mission.' }
+  { username: 'Amanda', password: 'newpassword', bio: 'Adventurer in the world of fantasy.' },
+  { username: 'Elena', password: 'password', bio: 'Magical being exploring new realms.' },
+  { username: 'Gideon', password: 'password', bio: 'Dungeon master with a passion for epic tales.' },
+  { username: 'Indigo', password: 'password', bio: 'Enthusiastic role-player and storyteller.' },
+  { username: 'Mira', password: 'password', bio: 'Seeker of treasures and ancient mysteries.' },
+  { username: 'Felix', password: 'password', bio: 'Bard with a silver tongue and a quick wit.' },
+  { username: 'Thalia', password: 'password', bio: 'Mystical sorceress wielding arcane powers.' },
+  { username: 'Cyrus', password: 'password', bio: 'Rogue with a shady past and a quick blade.' },
+  { username: 'Luna', password: 'password', bio: 'Moonlit ranger with a bow and a wolf companion.' },
+  { username: 'Orion', password: 'password', bio: 'Celestial cleric on a divine mission.' }
 ])
 
 # Seed data for campaigns

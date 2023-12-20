@@ -1,4 +1,5 @@
 class CampaignsController < ApplicationController
+  skip_before_action :authorize, only: [:index, :show]
   before_action :set_campaign, only: %i[ show update destroy ]
 
   # GET /campaigns
@@ -15,13 +16,13 @@ class CampaignsController < ApplicationController
 
   # POST /campaigns
   def create
-    @campaign = Campaign.new(campaign_params)
-
-    if @campaign.save
-      render json: @campaign, status: :created, location: @campaign
-    else
-      render json: @campaign.errors, status: :unprocessable_entity
-    end
+    @campaign = @current_user.dungeon_master_campaigns.create!(campaign_params)
+    render json: @campaign
+    # if @campaign.save
+    #   render json: @campaign, status: :created, location: @campaign
+    # else
+    #   render json: @campaign.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /campaigns/1
@@ -46,6 +47,6 @@ class CampaignsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def campaign_params
-      params.require(:campaign).permit(:title, :description)
+      params.permit(:title, :description)
     end
 end
