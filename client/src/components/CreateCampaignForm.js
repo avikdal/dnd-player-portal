@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../features/authSlice';
+import { addDungeon } from '../features/authSlice';
 
 export default function CreateCampaignForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [isChecked, setIsChecked] = useState(false);
     const [campaignInfo, setCampaignInfo] = useState({
       description: '',
       title: '',
     });
-  
   
   
     const handleChange = (e) => {
@@ -22,9 +20,6 @@ export default function CreateCampaignForm() {
       }));
     };
 
-    // const handleCheckboxChange = () => {
-    //     setIsChecked((prevChecked) => !prevChecked);
-    //   };
   
     function handleSubmit(e){
       e.preventDefault();
@@ -39,8 +34,7 @@ export default function CreateCampaignForm() {
   
         if (response.ok) {
           response.json().then((data) => {
-              console.log(data)
-            dispatch(setUser(data.user))
+            dispatch(addDungeon(data));
             navigate('/profile');
           })
         } else {
@@ -84,7 +78,7 @@ export default function CreateCampaignForm() {
         </label> */}
 
 
-        <button type="submit" class="block">Create Campaign</button>
+        <button type="submit" className="block">Create Campaign</button>
       </form>
       </div>
     );

@@ -34,11 +34,11 @@ export default function NavBar() {
   const user = useSelector(selectUser);
 
 
-  if(user){
+  if (user && user.id !== null){
 
   return (
     <div className="topnav">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/campaigns">Campaigns</Link>
         <Link to="/characters">Character Creation</Link>
         <Link to="/profile" className="split">Profile</Link>

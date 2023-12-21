@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, logout, selectUser, loginSuccess } from '../features/authSlice';
+import { selectUser, loginSuccess } from '../features/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -14,23 +14,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
-
-
-  // useEffect(() => {
-  //   // auto-login
-  //   console.log("user in effect", user)
-  //   fetch("/me").then((r) => {
-  //     if (r.ok) {
-  //       r.json()
-  //       .then((user) => {
-  //         dispatch(setUser(user))
-  //         navigate('/profile')
-  //       });
-  //     }
-  //   });
-  // }, []);
-
-  console.log("user", user)
 
   function handleLogin(e) {
     e.preventDefault();
@@ -46,11 +29,8 @@ const LoginForm = () => {
       if (response.ok) {
         response.json()
         .then((userData) => {
-            console.log("hello user", userData)
-            // dispatch(setUser(user));
-            // Dispatching login success
             dispatch(loginSuccess(userData));
-            navigate('/profile');
+            navigate('/home');
         })
 
       } else {
@@ -61,16 +41,8 @@ const LoginForm = () => {
     })
   };
 
-  // const handleLogout = () => {
-  //   fetch("/logout", { method: "DELETE" })
-  //   .then(() => {
-  //       console.log("check that logged out")
-  //       dispatch(logout())
-  //   })
-  // };
 
   return (
-    // <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <div>
       <h3>Login</h3>
       <Form onSubmit={handleLogin} >

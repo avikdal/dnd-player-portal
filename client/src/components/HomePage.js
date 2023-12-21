@@ -1,74 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/authSlice';
-import LoginForm from './LoginForm';
-import Signup from './Signup';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { selectUser, selectPosts, setPosts, addPost } from '../features/authSlice';
+import PostCard from './PostCard';
 
 
 
-export default function Home() {
-  const [posts, setPosts] = useState([])
-  const [showLogin, setShowLogin] = useState(true);
+
+export default function Home( { posts, handlePostCreate, handlePostUpdate, handlePostDelete } ) {
   const user = useSelector(selectUser);
+  // const dispatch = useDispatch(selectPosts)
+  const [postContent, setPostContent] = useState("");
 
-  useEffect(() => {
-    fetch('/posts')
-    .then((r) => r.json())
-    .then((posts) => {
-      console.log(posts)
-      setPosts(posts)
-    });
-  }, [])
-
-  console.log("user", user)
-
-  if(user == null || user.error ){
-
-    return(
-      <div>
-      {showLogin ? (
-      <>
-        <LoginForm />
-        <p>
-          Don't have an account? &nbsp;
-          <button color="secondary" onClick={() => setShowLogin(false)}>
-            Sign Up
-          </button>
-        </p>
-      </>
-    ) : (
-      <>
-        <Signup />
-        <p>
-          Already have an account? &nbsp;
-          <button color="secondary" onClick={() => setShowLogin(true)}>
-            Log In
-          </button>
-        </p>
-      </>
-    )}
-    </div>
-    )
-  } else {
 
     const postsCards = posts.length > 0 ? (
-      posts.map((p) => (
-        <div className="card" key={p.id}>
-          <h2>{p.user.username}</h2>
-          <p>{p.content}</p>
-        </div>
+      [...posts].reverse().map((p) => (
+        <PostCard key={p.id} postData={p} handlePostUpdate={handlePostUpdate} handlePostDelete={handlePostDelete} />
       ))
     ) : (
-      <p>No posts available</p>
+      <p>No posts yet</p>
     );
 
+    const handleInputChange = (e) => {
+      setPostContent(e.target.value);
+    };
+
+    function handleSubmit(e){
+      e.preventDefault();
+      handlePostCreate(postContent)
+      setPostContent("")
+    }
+  
+  
 
   return (
     <div>
       <h1> Hello {user.username} </h1>
       <hr></hr>
       <div className="card">
-        <p>Whats on your mind?</p>
+        <form onSubmit={handleSubmit}>
+        <input type="text" value={postContent} onChange={handleInputChange} placeholder="What's on your mind?"/>
+        <button type='submit'>Create Post</button>
+        </form>
       </div>
       <div className="row">
         <div className="leftcolumn">
@@ -77,5 +49,5 @@ export default function Home() {
       </div>
     </div>
   )
-  }
+  //}
 }

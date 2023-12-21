@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
+  skip_before_action :authorize, only: [:index, :show]
   before_action :set_post, only: %i[ show update destroy ]
 
-  
 
   # GET /posts
   def index
@@ -17,13 +17,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
-    if @post.save
-      render json: @post, status: :created, location: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
+    @post = @current_user.posts.create!(post_params)
+    render json: @post
   end
 
   # PATCH/PUT /posts/1
@@ -41,13 +36,15 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+ 
     def set_post
-      @post = Post.find(params[:id])
+      # @post = Post.find(params[:id])
+      @post = @current_user.posts.find(params[:id])
+
     end
 
-    # Only allow a list of trusted parameters through.
+
     def post_params
-      params.require(:post).permit(:content, :user_id)
+      params.permit(:content, :user_id)
     end
 end

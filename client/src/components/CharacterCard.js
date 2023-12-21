@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser, selectUser } from '../features/authSlice';
+import { selectUser } from '../features/authSlice';
 import Button from 'react-bootstrap/Button';
 
 
@@ -9,20 +9,6 @@ export default function CharacterCard( { info } ) {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     // auto-login
-    //     console.log("user in effect", user)
-    //     fetch("/me").then((r) => {
-    //       if (r.ok) {
-    //         r.json()
-    //         .then((user) => {
-    //           dispatch(setUser(user))
-    //         });
-    //       }
-    //     });
-    //   }, []);
-
- 
 
   return (
     <div className="card">

@@ -32,7 +32,7 @@ export default function Signup() {
                 // dispatch(setUser(user))
                 // Dispatching signup success
                 dispatch(signupSuccess(newUser));
-                navigate('/profile')
+                navigate('/home')
             } else {
                 const errorLis = newUser.errors.map(e => <li key={e}>{e}</li>)
                 setErrorList(errorLis)
