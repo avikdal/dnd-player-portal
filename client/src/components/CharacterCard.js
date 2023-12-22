@@ -1,13 +1,10 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectUser } from '../features/authSlice';
 import Button from 'react-bootstrap/Button';
 
 
 export default function CharacterCard( { info } ) {
-    const { alignment, character_class, id, image, name, race } = info
-    const user = useSelector(selectUser);
-    const dispatch = useDispatch();
+    const { alignment, character_class, image, name, race } = info
+
 
 
   return (
@@ -19,7 +16,8 @@ export default function CharacterCard( { info } ) {
                 <p><b> Race: {race}</b></p>
                 <p><b> Class: {character_class}</b></p>
                 <p><b> Alignment: {alignment}</b></p>
-                <Button variant="primary">Edit {name}</Button>
+                <Button variant="primary">Edit {name}</Button> &nbsp;
+                <Button variant="primary">Delete {name}</Button>
             </div>
   
     </div>

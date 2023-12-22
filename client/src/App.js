@@ -18,6 +18,7 @@ function App() {
   const user = useSelector(selectUser);
   const posts = useSelector(selectPosts);
   const campaigns = useSelector(selectCampaigns);
+  const [errors, setErrors] = useState([]);
 
 
   useEffect(() => {
@@ -28,16 +29,18 @@ function App() {
         .then((user) => {
           dispatch(setUser(user))
         });
+      } else {
+        r.json().then((error) => setErrors(error.errors));
       }
     });
-  }, []);
+  }, [dispatch]);
 
 
   useEffect(() => {
     fetch('/campaigns')
     .then((r) => r.json())
     .then((campaigns) =>  dispatch(setCampaigns(campaigns)));
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     fetch('/posts')
@@ -45,7 +48,7 @@ function App() {
     .then((postsData) => {
       dispatch(setPosts(postsData));
     });
-  }, [])
+  }, [dispatch])
 
   function handlePostCreate(postContent){
     fetch('/posts', {
@@ -58,15 +61,16 @@ function App() {
         content: postContent,
       }),
     })
-      .then((r) => r.json())
-      .then((newPost) => {
-        // Dispatch an action to add the new post to the Redux state
-        dispatch(addPost(newPost));
-      })
-      .catch((error) => {
-        console.error('Error creating post:', error);
-      });
-  };
+    .then(r => {
+      if (r.ok){
+      r.json().then(newPost => dispatch(addPost(newPost)));
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
+  }
+  
+
 
   // update post
   function handlePostUpdate(updatedPost) {
@@ -80,19 +84,17 @@ function App() {
       },
       body: JSON.stringify(updatedPost),
     })
-      .then((r) => r.json())
-      .then((updatedPostData) => {
-        // Dispatch the editPost action to update the Redux state
-        dispatch(editPost(updatedPostData));
-      })
-      .catch((error) => {
-        console.error('Error updating post:', error);
-      });
+    .then(r => {
+      if (r.ok){
+      r.json().then(updatedPostData => dispatch(editPost(updatedPostData)));  // Dispatch the editPost action to update the Redux state
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
   }
 
   // delete a post
   function handlePostDelete(post) {
-    console.log("post to delete in app", post)
     fetch(`/posts/${post.id}`, {
        method: 'DELETE',
     })
@@ -103,7 +105,7 @@ function App() {
     .catch((error) => {
       console.error('Error deleting post:', error);
     });
-}
+  }
 
 
   return (
@@ -111,9 +113,9 @@ function App() {
     <NavBar />
     <Routes>
       <Route exact path="/" element={<Access />} />
-      <Route exact path="/home" element={<HomePage posts={posts} handlePostCreate={handlePostCreate} handlePostUpdate={handlePostUpdate} handlePostDelete={handlePostDelete} />} />
+      <Route exact path="/home" element={<HomePage posts={posts} handlePostCreate={handlePostCreate} handlePostUpdate={handlePostUpdate} handlePostDelete={handlePostDelete} errors={errors} />} />
       <Route exact path="/login" element={<LoginForm />} />
-      <Route exact path="/profile" element={<Profile posts={posts} handlePostCreate={handlePostCreate} handlePostUpdate={handlePostUpdate} handlePostDelete={handlePostDelete} />} />
+      <Route exact path="/profile" element={<Profile posts={posts} handlePostCreate={handlePostCreate} handlePostUpdate={handlePostUpdate} handlePostDelete={handlePostDelete} errors={errors} />} />
       <Route exact path="/characters" element={<CreateCharacterForm campaigns={campaigns} />} />
       <Route exact path="/campaigns" element={<CampaignsPage campaigns={campaigns} />} />
       <Route exact path="/create-campaign" element={<CreateCampaignForm  />} />

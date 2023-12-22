@@ -23,7 +23,6 @@ export default function CreateCampaignForm() {
   
     function handleSubmit(e){
       e.preventDefault();
-  
           fetch('/campaigns', {
           method: 'POST',
           headers: {
@@ -31,7 +30,6 @@ export default function CreateCampaignForm() {
           },
           body: JSON.stringify(campaignInfo),
         }).then((response) => {
-  
         if (response.ok) {
           response.json().then((data) => {
             dispatch(addDungeon(data));
@@ -39,7 +37,6 @@ export default function CreateCampaignForm() {
           })
         } else {
           console.error('Campaign creation failed:', response.statusText);
-          // Handle the errors
         }
       })
     };
@@ -76,7 +73,6 @@ export default function CreateCampaignForm() {
             onChange={handleCheckboxChange}
           />
         </label> */}
-
 
         <button type="submit" className="block">Create Campaign</button>
       </form>

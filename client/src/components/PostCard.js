@@ -6,6 +6,8 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
     const user = useSelector(selectUser);
     const [postContent, setPostContent] = useState(postData.content);
     const [isEditing, setIsEditing] = useState(false);
+    const [error, setError] = useState('');
+
   
     const handleEditClick = () => {
         setIsEditing(true);
@@ -20,10 +22,19 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
       };
 
     const handleSubmit = (e) => {
-            e.preventDefault();
-            const updatedPost = { ...postData, content: postContent };
-            handlePostUpdate(updatedPost);
-            setIsEditing(false); // Reset the editing state
+        e.preventDefault();
+
+        // Trim the content and check if it's blank
+        const trimmedContent = postContent.trim();
+        if (trimmedContent === '') {
+          setError('Post cannot be blank');
+          return;
+        }
+
+        const updatedPost = { ...postData, content: postContent };
+        handlePostUpdate(updatedPost);
+        setIsEditing(false); // Reset the editing state
+        setError(''); // Reset the error state
     };
     
 
@@ -40,6 +51,7 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
                   onChange={handleInputChange}
                 />
                 <button type="submit">Update Post</button>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
               </form>
             </div>
           </div>
@@ -73,7 +85,3 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
 
 
 
-
-// function updatePost(newContent){
-//     updatedPost = {...postData, content: newContent}
-//   }

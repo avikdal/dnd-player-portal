@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/authSlice';
+import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import Signup from './Signup';
 
 
 export default function Access() {
-        const [posts, setPosts] = useState([])
         const [showLogin, setShowLogin] = useState(true);
-        const user = useSelector(selectUser);
+       
         
   return (
     <div>

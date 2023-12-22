@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, selectUser } from '../features/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -86,7 +86,6 @@ export default function Profile( { posts, handlePostCreate, handlePostUpdate, ha
             <h3 onClick={() => {setShowDungeons(!showDungeons)}}>My Dungeons</h3>
             {showDungeons ? dungeons : null }
             <div className="card">
-              {/* <p>Whats on your mind?</p> */}
               <form onSubmit={handleSubmit}>
                   <input 
                     type="text" 

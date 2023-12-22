@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser, addCharacter } from '../features/authSlice';
+import { addCharacter } from '../features/authSlice';
 
 export default function CreateCharacterForm({ campaigns }) {
   const dispatch = useDispatch();
@@ -14,12 +14,6 @@ export default function CreateCharacterForm({ campaigns }) {
     image: '', // provide a default image URL ???
     campaign_id: '',
   });
-
-//   useEffect(() => {
-//     fetch('/campaigns')
-//     .then((r) => r.json())
-//     .then((campaigns) => setCampaigns(campaigns));
-//   }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,18 +33,13 @@ export default function CreateCharacterForm({ campaigns }) {
         },
         body: JSON.stringify(characterInfo),
       }).then((response) => {
-
       if (response.ok) {
         response.json().then((newCharacter) => {
-            console.log(newCharacter)
-            // dispatch(setUser(data.user))
-            // Dispatching add character
             dispatch(addCharacter(newCharacter));
             navigate('/profile');
         })
       } else {
-        console.error('Character creation failed:', response.statusText);
-        // Handle the errors
+        console.error('Character creation failed:', response);
       }
     })
   };
