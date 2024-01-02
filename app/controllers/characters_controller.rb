@@ -2,6 +2,7 @@ class CharactersController < ApplicationController
   skip_before_action :authorize, only: [:index, :show]
 
   before_action :set_character, only: %i[ show update destroy ]
+  before_action :check_ownership, only: %i[update destroy]
 
   # GET /characters
   def index
@@ -44,5 +45,11 @@ class CharactersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def character_params
       params.permit(:character_class, :race, :alignment, :name, :image, :campaign_id)
+    end
+
+    def check_ownership
+      unless @character.user == @current_user
+        render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
+      end
     end
 end
