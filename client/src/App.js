@@ -74,7 +74,6 @@ function App() {
 
   // update post
   function handlePostUpdate(updatedPost) {
-    console.log("updated post in app", updatedPost)
     let id = updatedPost.id
 
     fetch(`/posts/${id}`, {
