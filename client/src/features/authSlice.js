@@ -35,7 +35,6 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     setUser: (state, action) => {
-      // console.log("action in sclice", action)
       state.user = action.payload;
       state.isAuthenticated = !!action.payload;
     },
@@ -107,15 +106,6 @@ export const authSlice = createSlice({
       // Update user.posts state
       state.user.dungeon_master_campaigns = [...state.user.dungeon_master_campaigns, action.payload];
     },
-    // setUser: (state, action) => {
-    //   console.log("action in sclice", action)
-    //   state.user = action.payload;
-    //   state.isAuthenticated = !!action.payload;
-    // },
-    // logout: (state) => {
-    //   state.user = null;
-    //   state.isAuthenticated = false;
-    // },
   },
 });
 
@@ -142,31 +132,3 @@ export const selectCampaigns = (state) => state.auth.campaigns;
 export default authSlice.reducer;
 
 
-    // setUser: (state, action) => {
-    //   const updatedUser = { ...state.user }; // Create a copy of the user object
-    //   updatedUser.characters = [...state.user.characters, action.payload]; // Add the new character to the characters array
-    //   state.user = updatedUser; // Update the user state
-    //   state.isAuthenticated = !!action.payload;
-    // },
-
-
-    // setUser: (state, action) => {
-    //   const { type, payload } = action;
-
-    //   switch (type) {
-    //     case 'UPDATE_PROFILE':
-    //       state.user = { ...state.user, ...payload };
-    //       break;
-
-    //     case 'ADD_CHARACTER':
-    //       state.user.characters = [...state.user.characters, payload];
-    //       state.isAuthenticated = true; // Assuming adding a character means the user is authenticated
-    //       break;
-
-    //     // Add more cases as needed...
-
-    //     default:
-    //       break;
-    //   }
-    // },
-    //dispatch(setUser({ type: 'ADD_CHARACTER', payload: newCharacter }));

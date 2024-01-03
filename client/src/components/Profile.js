@@ -83,8 +83,10 @@ export default function Profile( { posts, handlePostCreate, handlePostUpdate, ha
             </div>
             <h3 onClick={() => {setShowCharacters(!showCharacters)}}>My Characters</h3>
             {showCharacters ? characters : null}{' '}
+            <hr></hr>
             <h3 onClick={() => {setShowDungeons(!showDungeons)}}>My Dungeons</h3>
             {showDungeons ? dungeons : null }
+            <hr></hr>
             <div className="card">
               <form onSubmit={handleSubmit}>
                   <input 

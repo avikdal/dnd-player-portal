@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUser, loginSuccess } from '../features/authSlice';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../features/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,7 +9,6 @@ import Form from 'react-bootstrap/Form';
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -35,16 +34,14 @@ const LoginForm = () => {
 
       } else {
         response.json().then((error) => setErrors(error));
-        // const errorLis = user.errors.map(e => <li key={e}>{e}</li>)
-        // setErrorList(errorLis)
       }
     })
   };
 
 
   return (
-    <div>
-      <h3>Login</h3>
+    <div style={{ color: 'whitesmoke', backgroundColor: 'black' }}>
+      <h3 style={{ textAlign: 'center' }}>Login</h3>
       <Form onSubmit={handleLogin} >
 
         <Form.Group className="mb-3" controlId="formBasicEmail">

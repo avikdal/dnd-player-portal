@@ -41,8 +41,8 @@ export default function Signup() {
     }
 
   return (
-    <div>
-        <h3>Create New Account</h3>
+    <div style={{ color: 'whitesmoke', backgroundColor: 'black' }}>
+        <h3 style={{ textAlign: 'center' }}>Create New Account</h3>
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Username</Form.Label>{' '}
