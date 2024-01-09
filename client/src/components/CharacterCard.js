@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
-
+import dwarf from './dwarf.jpg';
 
 export default function CharacterCard( { info } ) {
     const { alignment, character_class, image, name, race } = info
@@ -10,7 +10,7 @@ export default function CharacterCard( { info } ) {
   return (
     <div className="card">
         
-            <img src={image} alt="Avatar" style={{ width: '100%' }}/>
+            <img src={dwarf} alt="Avatar" style={{ width: '100%' }}/>
             <div className="container">
                 <h4><b>Name: {name}</b></h4>
                 <p><b> Race: {race}</b></p>

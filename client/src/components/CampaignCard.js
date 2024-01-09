@@ -3,10 +3,12 @@ import tavern from './tavern.jpg';
 
 export default function CampaignCard({ campaignInfo }) {
     const [dropDown, setDropDown] = useState(false)
-    const { title, description, dungeon_master_id, characters, users } = campaignInfo
-    const dungeonMaster = users.find((user) => user.id === dungeon_master_id)
+    const { title, description, characters } = campaignInfo
+   
+    // add dungeon master to card
+    // list all players & characters on card
 
-
+    
    
   return (
     <div className="card">
@@ -19,7 +21,6 @@ export default function CampaignCard({ campaignInfo }) {
         
         { dropDown ?
             <div className="content">
-                <p>Dungeon Master: {dungeonMaster ? dungeonMaster.username : 'Not Available'} </p>
                 <p>Player Count: {characters.length}</p>
             </div>
         : null }

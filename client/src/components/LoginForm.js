@@ -40,8 +40,8 @@ const LoginForm = () => {
 
 
   return (
-    <div style={{ color: 'whitesmoke', backgroundColor: 'black' }}>
-      <h3 style={{ textAlign: 'center' }}>Login</h3>
+    <div>
+      <h3>Login</h3>
       <Form onSubmit={handleLogin} >
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -59,7 +59,7 @@ const LoginForm = () => {
           <Form.Label>Password</Form.Label>{' '}
             <input 
               placeholder="Password" 
-              type="text"
+              type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -69,7 +69,6 @@ const LoginForm = () => {
         <Form.Group>
           {/* {Array.isArray(errors) && errors.map((error) => (<div key={error}>{error}</div>))} */}
           {Object.values(errors).map((error, index) => ( <div key={index}>{error}</div> ))}
-
         </Form.Group>
 
         <Button variant="primary" type="submit"> Submit </Button>

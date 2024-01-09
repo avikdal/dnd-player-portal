@@ -41,8 +41,8 @@ export default function Signup() {
     }
 
   return (
-    <div style={{ color: 'whitesmoke', backgroundColor: 'black' }}>
-        <h3 style={{ textAlign: 'center' }}>Create New Account</h3>
+    <div >
+        <h3 >Create New Account</h3>
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Username</Form.Label>{' '}
@@ -59,7 +59,7 @@ export default function Signup() {
                 <Form.Label>Password</Form.Label>{' '}
                 <Form.Control 
                     placeholder="Password" 
-                    type="text"
+                    type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

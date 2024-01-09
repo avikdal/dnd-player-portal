@@ -15,26 +15,38 @@ export default function Access() {
           minHeight: '100vh', // Set a minimum height to cover the entire viewport
           position: 'relative',
         };
+
+        const contentStyle = {
+          textAlign: 'center',
+          color: 'whitesmoke',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)', // Added some transparency to the background
+          padding: '50px 20px 30px', // Adjusted padding (top 30px, vertical 20px, bottom 50px)
+          width: '50%', 
+          margin:  '0 auto', // 20px top margin, center horizontally
+        };
+
+        const formStyle = {
+          color: 'whitesmoke',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          padding: '50px 20px',
+          width: '50%', 
+          margin: '0 auto', 
+        };
        
         
   return (
     // <div style={{margin: '70px'}}>
     <div style={containerStyle}>
-    <div style={{
-               position: 'absolute',
-               left: '50%',
-               top: '25%',
-               transform: 'translate(-50%, -50%)'
-        }}>
-      <div style={{  textAlign: "center", color: 'whitesmoke', backgroundColor: 'black' }}>
+  
+      <div  style={contentStyle}>
         <h2>Welcome to EpicQuest Tavern</h2>
         <p>Embark on epic adventures at EpicQuest Tavern, your go-to hub for Dungeons & Dragons character creation, questing, and connecting with fellow players in a vibrant community. Raise your tankard, roll the dice, and let the tales unfold in this immersive realm of imagination. </p>
       </div>
-
+      <div style={formStyle}>
     {showLogin ? (
     <>
       <LoginForm />
-      <p style={{  textAlign: "center", color: 'whitesmoke' }}>
+      <p >
         Don't have an account? &nbsp;
         <button color="secondary" onClick={() => setShowLogin(false)}>
           Sign Up
@@ -44,7 +56,7 @@ export default function Access() {
   ) : (
     <>
       <Signup />
-      <p style={{  textAlign: "center", color: 'whitesmoke' }}>
+      <p >
         Already have an account? &nbsp;
         <button color="secondary" onClick={() => setShowLogin(true)}>
           Log In
@@ -54,6 +66,7 @@ export default function Access() {
   )}
   </div>
   </div>
+ 
   )
 }
 

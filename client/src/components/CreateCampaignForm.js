@@ -6,6 +6,7 @@ import { addDungeon } from '../features/authSlice';
 export default function CreateCampaignForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [errorList, setErrorList] = useState({})
     const [campaignInfo, setCampaignInfo] = useState({
       description: '',
       title: '',
@@ -36,10 +37,11 @@ export default function CreateCampaignForm() {
             navigate('/profile');
           })
         } else {
-          console.error('Campaign creation failed:', response.statusText);
+          response.json().then((errors) => setErrorList(errors));
         }
       })
     };
+
   
     return (
       <div className='createCharacterForm'>
@@ -73,7 +75,9 @@ export default function CreateCampaignForm() {
             onChange={handleCheckboxChange}
           />
         </label> */}
-
+        <ul>
+        {errorList.errors.map((error, index) => ( <li key={index}>{error}</li> ))}
+        </ul>
         <button type="submit" className="block">Create Campaign</button>
       </form>
       </div>
