@@ -17,6 +17,12 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
         handlePostDelete(postData)
     }
 
+    function handleCancelUpdate(){
+      setIsEditing(false);
+      setPostContent(postData.content); // Reset post content to original value
+      setError(''); // Reset the error state
+    }
+
     const handleInputChange = (e) => {
         setPostContent(e.target.value);
       };
@@ -51,6 +57,7 @@ export default function PostCard( { postData, handlePostUpdate, handlePostDelete
                   onChange={handleInputChange}
                 />
                 <button type="submit">Update Post</button>
+                <button type="button" onClick={handleCancelUpdate}> Cancel Update </button>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
               </form>
             </div>

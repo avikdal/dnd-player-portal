@@ -2,11 +2,24 @@ import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import Signup from './Signup';
 import tavern from './tavern.jpg';
+// import { useSelector } from 'react-redux';
+// import { selectUser } from '../features/authSlice';
+// import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Access() {
-        const [showLogin, setShowLogin] = useState(true);
+      const [showLogin, setShowLogin] = useState(true);
+      // const user = useSelector(selectUser);
+      // const navigate = useNavigate();
+
+      // if user
+  //         // Redirect to another page if the user is already signed in
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/home'); // Redirect to the home page or any other page
+  //   }
+  // }, [user, navigate]);
 
         const containerStyle = {
           backgroundImage: `url(${tavern})`,
@@ -35,7 +48,7 @@ export default function Access() {
        
         
   return (
-    // <div style={{margin: '70px'}}>
+  
     <div style={containerStyle}>
   
       <div  style={contentStyle}>

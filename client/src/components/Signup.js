@@ -11,11 +11,22 @@ export default function Signup() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState(""); 
     const [errorList, setErrorList] = useState([])
+
+
 
 
     function handleSubmit(e) {
         e.preventDefault();
+
+            // Check if password and password confirmation match
+        if (password !== confirmPassword) {
+        // Use return to prevent further execution and re-renders
+        setErrorList(["Passwords do not match"]);
+        return;
+        }
+
         fetch("/signup", {
           method: "POST",
           headers: {
@@ -65,7 +76,20 @@ export default function Signup() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Confirm Password</Form.Label>{' '}
+                <Form.Control
+                    placeholder="Confirm Password"
+                    type="password"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </Form.Group>
+            <ul>
             {errorList}
+            </ul>
             <Button variant="primary" type="submit">Submit</Button>
         </Form>
     </div>

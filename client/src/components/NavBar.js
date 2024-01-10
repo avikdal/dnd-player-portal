@@ -20,6 +20,9 @@ export default function NavBar() {
         <Link to="/profile" className="split">Profile</Link>
     </div>
   )
+  } else {
+    // If there is no user or user.id is null, return null (no navigation bar)
+    return null;
   }
   // } else {
 

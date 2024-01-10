@@ -124,3 +124,6 @@ function App() {
 }
 
 export default App;
+
+
+// change home page such thatif "/home" is manually entered check for user otherwise navigate to Signup page

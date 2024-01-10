@@ -38,6 +38,13 @@ const LoginForm = () => {
     })
   };
 
+  const inputStyle = {
+    width: '50%',  // Adjust the width as needed
+    padding: '10px', // Add padding for better appearance
+    borderRadius: '5px', // Add border radius for rounded corners
+    // Add any other styles you need
+  };
+
 
   return (
     <div>
@@ -52,6 +59,7 @@ const LoginForm = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            style={inputStyle}
           />
         </Form.Group>
 
@@ -63,6 +71,7 @@ const LoginForm = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              style={inputStyle}
             />
         </Form.Group>
 

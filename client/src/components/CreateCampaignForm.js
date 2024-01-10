@@ -75,9 +75,15 @@ export default function CreateCampaignForm() {
             onChange={handleCheckboxChange}
           />
         </label> */}
-        <ul>
+        {/* <ul>
         {errorList.errors.map((error, index) => ( <li key={index}>{error}</li> ))}
+        </ul> */}
+        <ul>
+          {errorList.errors && errorList.errors.map((error, index) => (
+          <li key={index}>{error}</li>
+           ))}
         </ul>
+
         <button type="submit" className="block">Create Campaign</button>
       </form>
       </div>
