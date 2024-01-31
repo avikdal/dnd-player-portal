@@ -51,12 +51,8 @@ export const authSlice = createSlice({
       );
     },
     setPosts: (state, action) => {
-      // console.log("action in sclice", action)
       state.posts = action.payload;
     },
-    // addPost: (state, action) => {
-    //   state.user.posts = [...state.user.posts, action.payload];
-    // },
     addPost: (state, action) => {
       const newPost = action.payload;
 
