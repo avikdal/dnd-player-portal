@@ -37,7 +37,6 @@ export default function Home( { posts, handlePostCreate, handlePostUpdate, handl
 
   return (
     <div>
-      <h1> Hello {user.username} </h1>
       <hr></hr>
       <div className="card">
         <form onSubmit={handleSubmit}>
